@@ -112,6 +112,10 @@ if [ "$GIGALIXIR_SHOULD_HOT_UPGRADE" = "true" ]; then
   # remove current version so we know which is then new version to release.
   rm -rf _build/${RELEASE_ENV}/rel/$APP/releases/$VERSION
 else
+  # is this needed? we just ask them to clear the build cache and that fixes it.
+  # clear out existing release folder in case `release=true` from the elixir buildpack was used.
+  # rm -rf _build/${RELEASE_ENV}/rel/$APP/releases/*
+
   RELEASE_CMD=$(distillery_mix_release_command)
   mix $RELEASE_CMD $RELEASE_OPTIONS
 fi
